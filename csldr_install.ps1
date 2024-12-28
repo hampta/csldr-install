@@ -64,7 +64,7 @@ $version = Get-Content $version_file
 # Check if client.dll is Valve's original client.dll
 $signature = Get-AuthenticodeSignature -FilePath "./cstrike/cl_dlls/client.dll"
 
-# If the CN is Valve Corp., the client.dll is the original client.dll
+# check if the client.dll is signed
 if ($signature.Status -eq "Valid") {
     Write-Host "Original client.dll found, reinstallaing csldr..."
     $version = ""
