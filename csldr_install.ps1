@@ -45,7 +45,7 @@ foreach ($line in $libraryContent) {
 # ask user to find non-steam Counter-Strike installation path
 if (-not $csPath) {
     Write-Host "Counter-Strike 1.6 installation path not found."
-    $csPath = Read-Host "Please enter the path to your Counter-Strike 1.6 installation directory: "
+    $csPath = Read-Host "Please enter the path to your Counter-Strike 1.6 installation directory"
 }
 
 # set working directory to Counter-Strike installation path
@@ -74,7 +74,9 @@ if ($signature.Status -eq "Valid") {
 $latest = Invoke-WebRequest -Uri "https://api.github.com/repos/mikkokko/csldr/releases/latest" | ConvertFrom-Json
 if ($latest.tag_name -eq $version) {
     Write-Host "Already up to date"
-    exit
+    # wait for user input
+    Read-Host "Press Enter to exit"
+    return
 }
 
 # Get the tag name and change log
@@ -103,3 +105,5 @@ else {
     Rename-Item "./cstrike/cl_dlls/client.dll" "client_orig.dll"
     Rename-Item "./cstrike/cl_dlls/client_temp.dll" "client.dll"
 }
+# wait for user input
+Read-Host "Press Enter to exit"
